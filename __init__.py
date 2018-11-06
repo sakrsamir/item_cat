@@ -18,7 +18,8 @@ APPLICATION_NAME = "menuapp"
 
 
 #Connect to database
-create_engine('postgresql://sakr:SSaa1219@localhost/itemsCatalog')
+engine = create_engine('postgresql://sakr:SSaa1219@localhost/itemsCatalog')
+Base.metadata.bind = engine
 # Create session
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
