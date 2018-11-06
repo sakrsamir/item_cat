@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>log in</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!--Google Sign In-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=start"> </script>
+</head>
+<body style="background-color: LightBlue;">
+<section id="login">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Login</h1>
+            </div>
+        </div>
+
+        <div class="row padding-top-20">
+            <div class="container">
+                <!--gplus signin-->
+                <div id="signInButton">
+                  <span class="g-signin"
+                    data-scope="openid email"
+                    data-clientid="533311851426-bcn98umc3d8ojtseb56bqcihuvbup5em.apps.googleusercontent.com"
+                    data-redirecturi="postmessage"
+                    data-accesstype="offline"
+                    data-cookiepolicy="single_host_origin"
+                    data-callback="signInCallback"
+                    data-approvalprompt="force">
+                  </span>
+                </div>
+                <!--/gplus signin-->
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="login-success" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div id="result"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Google Login-->
+    <script>
+    function signInCallback(authResult) {
+      if (authResult['code']) {
+        $('#login').attr('style','display:none');
+        $.ajax({
+          type: 'POST',
+          url: '/gconnect?state={{STATE}}',
+          processData: false,
+          data: authResult['code'],
+          contentType: 'application/octet-stream; charset=utf-8',
+          success: function(result) {
+            if (result) {
+              $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting To Your Request...');
+              setTimeout(function() {
+                window.location.href = "/cat/";
+              }, 4000);
+            } else if (authResult['error']) {
+              console.log('There was an error: ' + authResult['error']);
+            } else {
+              $('#result').html('Failed in  server-side call.');
+            }
+          },
+          error: function(result) {
+            console.log('There was an error: ' + result);
+          }
+
+      }); } }
+    </script>
+    <!--/Google Login-->
+</body>
+</html>

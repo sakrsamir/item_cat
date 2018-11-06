@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Add item</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body style="background-color: LightBlue;">
+<section id="addItem" class="section">
+    <div class="container ">
+        <h1>Add Item</h1>
+
+        <form action="{{url_for('addItem')}}" method = "post" >
+            <div class="form-group">
+                <label for="name">Item Name:</label>
+                <input type ="text" class="form-control" id="name" maxlength="250" name="name">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" class="form-control" maxlength="250" cols="30" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="picture">Picture URL:</label>
+                <input type ="url" class="form-control" id="picture" maxlength="250" name="picture" placeholder="http://www.weburl.com">
+            </div>
+            <div class="form-group">
+                <label for="picture">Category:</label>
+                <select name="category">
+                {% for c in categories %}
+                    <option value="{{c.name}}">{{c.name}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="submit" class="btn btn-primary">Save</button>
+                <a href="{{url_for('showCatalog')}}">
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
+
+</body>
+</html>
