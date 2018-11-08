@@ -60,7 +60,7 @@ In this project, a Linux machine on AWS needs to be configurated to support the 
 3. reload SSH using `service ssh restart`
 4. now you can use ssh to login with the new user you created
 
-	`ssh -i [privateKeyFilename] grader@52.24.125.52`
+	`ssh -i [privateKeyFilename] grader@18.196.157.182`
 
 ## Update all currently installed packages
 
@@ -89,34 +89,6 @@ Configure the Uncomplicated Firewall (UFW) to only allow incoming connections fo
 2. Install mod_wsgi `sudo apt-get install python-setuptools libapache2-mod-wsgi`
 3. Restart Apache `sudo service apache2 restart`
 
-## Install and configure PostgreSQL
-1. Install PostgreSQL `sudo apt-get install postgresql`
-2. Check if no remote connections are allowed `sudo vim /etc/postgresql/9.3/main/pg_hba.conf`
-3. Login as user "postgres" `sudo su - postgres`
-4. Get into postgreSQL shell `psql`
-5. Create a new database named catalog  and create a new user named catalog in postgreSQL shell
-	
-	```
-	postgres=# CREATE DATABASE catalog;
-	postgres=# CREATE USER catalog;
-	```
-5. Set a password for user catalog
-	
-	```
-	postgres=# ALTER ROLE catalog WITH PASSWORD 'password';
-	```
-6. Give user "catalog" permission to "catalog" application database
-	
-	```
-	postgres=# GRANT ALL PRIVILEGES ON DATABASE catalog TO catalog;
-	```
-7. Quit postgreSQL `postgres=# \q`
-8. Exit from user "postgres" 
-	
-	```
-	exit
-	```
- 
 ## Install git, clone and setup your Catalog App project.
 1. Install Git using `sudo apt-get install git`
 2. Use `cd /var/www` to move to the /var/www directory 
@@ -125,12 +97,10 @@ Configure the Uncomplicated Firewall (UFW) to only allow incoming connections fo
 5. Clone the Catalog App to the virtual machine `git clone https://github.com/sakrsamir/item_cat.git`
 6. Rename the project's name `sudo mv ./Item_Catalog_UDACITY ./FlaskApp`
 7. Move to the inner FlaskApp directory using `cd FlaskApp`
-8. Rename `website.py` to `__init__.py` using `sudo mv website.py __init__.py`
-9. Edit `database_setup.py`, `__init__.py` and `database_init.p` and change `engine = create_engine('sqlite:///cat.db')` to `engine = create_engine('postgresql://catalog:password@localhost/catalog')`
-10. Install pip `sudo apt-get install python-pip`
-11. Use pip to install dependencies `sudo pip install -r requirements.txt`
-12. Install psycopg2 `sudo apt-get -qqy install postgresql python-psycopg2`
-13. Create database schema `sudo python database_setup.py`
+8. Edit `database_setup.py`, `__init__.py` and `database_init.p` and change `engine = create_engine('sqlite:///cat.db')` to `engine = create_engine('sqlite:////var/www/FlaskAPP/FlaskAPP/catalog')`
+9. Install pip `sudo apt-get install python-pip`
+10. Use pip to install dependencies `sudo pip install -r requirements.txt`
+11. Create database schema `sudo python database_setup.py`
 
 ## Configure and Enable a New Virtual Host
 1. Create FlaskApp.conf to edit: `sudo nano /etc/apache2/sites-available/FlaskApp.conf`
