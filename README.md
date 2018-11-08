@@ -4,7 +4,8 @@ In this project, a Linux virtual machine needs to be configurated to support the
 # Resource Link
 1. puplic ip : 18.196.157.182
 2. github repo : https://github.com/sakrsamir/item_cat.git
-3. access as grader :ssh -i ~/.ssh/s_project.rsa ubuntu@18.196.157.182 after downloading s_project.rsa file
+3. access as grader :ssh -i ~/.ssh/s_project grader@18.196.157.182
+
 
 ## Tasks
 1. Launch your Virtual Machine o AWS
