@@ -54,5 +54,5 @@ class Items(Base):
         }
 
 
-engine = create_engine('postgresql://sakr:SSaa1219@localhost/itemsCatalog')
+engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
 Base.metadata.bind = engine
