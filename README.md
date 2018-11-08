@@ -1,11 +1,9 @@
-# Linux-Server-Configuration-UDACITY
-In this project, a Linux virtual machine needs to be configurated to support the Item Catalog website.
+# Linux-Server-Item_Cat-Config
+In this project, a Linux machine on AWS needs to be configurated to support the Item Catalog websApp.
 
 # Resource Link
 1. puplic ip : 18.196.157.182
 2. github repo : https://github.com/sakrsamir/item_cat.git
-3. access as grader :ssh -i ~/.ssh/s_project grader@18.196.157.182
-
 
 ## Tasks
 1. Launch your Virtual Machine o AWS
