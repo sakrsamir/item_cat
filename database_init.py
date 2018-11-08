@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 import datetime
 from database_setup import *
 
-engine = create_engine('postgresql://sakr:SSaa1219@localhost/itemsCatalog')
+engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
